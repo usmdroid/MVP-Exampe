@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/login"
+        android:text="Log in"
+        android:layout_centerHorizontal="true"
+        android:textSize="40sp"
+        android:fontFamily="serif-monospace"
+        android:textStyle="bold"
+        android:textColor="#089"
+        />
+
+    <android.support.design.widget.TextInputLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login"
+        android:layout_marginTop="100dp"
+        android:id="@+id/username_input"
+        >
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="40dp"
+            android:layout_marginLeft="40dp"
+            android:hint="Username or email"
+            android:id="@+id/username"
+            android:inputType="textEmailAddress"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/password_input"
+        android:layout_below="@+id/username_input"
+        android:layout_marginTop="20dp"
+        app:passwordToggleEnabled="true"
+        >
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="40dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="20dp"
+            android:hint="Password"
+            android:id="@+id/password"
+            android:inputType="textPassword" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/signin"
+        android:text="signin"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        android:textSize="25dp"
+        android:layout_below="@id/password_input"
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"
+        android:background="#525d"/>
+
+</RelativeLayout>
