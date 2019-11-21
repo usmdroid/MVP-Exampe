@@ -44,12 +44,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void loginSuccess() {
         Toast.makeText(this, "Login va parol to'g'ri", Toast.LENGTH_SHORT).show();
-
     }
 
     @Override
     public void loginError() {
         Toast.makeText(this, "Username yoki parol xato", Toast.LENGTH_SHORT).show();
-
     }
 }
