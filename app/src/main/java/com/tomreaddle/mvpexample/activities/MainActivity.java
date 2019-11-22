@@ -2,6 +2,7 @@ package com.tomreaddle.mvpexample.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, com.tomreaddle.mvpexample.view.View {
 
-    public String APIuserame, APIpassword;
+    String APIusername, APIpassword;
     EditText username , password;
     Button signin;
 
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         apiConnect();
 
-        presenter = new Model(MainActivity.this);
+        presenter = new Model(MainActivity.this , APIusername , APIpassword);
         signin.setOnClickListener(this);
 
 
@@ -58,15 +59,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onResponse(Call<APIModel> call, Response<APIModel> response) {
                 APIModel data = response.body();
-                APIuserame = data.getUsername();
+                APIusername = data.getUsername();
                 APIpassword = data.getPassword();
+                Toast.makeText(MainActivity.this, APIusername + "\n" + APIpassword, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call<APIModel> call, Throwable t) {
-                Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-                APIuserame = "null";
+                APIusername = "null";
                 APIpassword = "null";
+                Toast.makeText(MainActivity.this, APIusername + "\n" + APIpassword, Toast.LENGTH_SHORT).show();
             }
         });
     }
