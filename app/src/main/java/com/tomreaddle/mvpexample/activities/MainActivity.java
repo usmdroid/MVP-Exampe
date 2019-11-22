@@ -7,9 +7,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.tomreaddle.mvpexample.API.APIinterface;
 import com.tomreaddle.mvpexample.R;
 import com.tomreaddle.mvpexample.model.Model;
 import com.tomreaddle.mvpexample.presenter.Presenter;
+
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, com.tomreaddle.mvpexample.view.View {
 
@@ -25,8 +29,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         signin = findViewById(R.id.signin);
+
+        apiConnect();
+
         presenter = new Model(MainActivity.this);
         signin.setOnClickListener(this);
+
+
+    }
+
+    private void apiConnect() {
+        Retrofit retrofit = new Retrofit
+                .Builder()
+                .baseUrl(APIinterface.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        APIinterface apIinterface = retrofit.create(APIinterface.class);
     }
 
     @Override
