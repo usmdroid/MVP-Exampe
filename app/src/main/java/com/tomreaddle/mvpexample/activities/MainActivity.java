@@ -7,11 +7,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.tomreaddle.mvpexample.API.APIModel;
 import com.tomreaddle.mvpexample.API.APIinterface;
 import com.tomreaddle.mvpexample.R;
 import com.tomreaddle.mvpexample.model.Model;
 import com.tomreaddle.mvpexample.presenter.Presenter;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -19,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     EditText username , password;
     Button signin;
+    String APIuserame, APIpassword;
 
     Presenter presenter;
     @Override
@@ -39,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void apiConnect() {
+
         Retrofit retrofit = new Retrofit
                 .Builder()
                 .baseUrl(APIinterface.BASE_URL)
@@ -46,6 +52,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .build();
 
         APIinterface apIinterface = retrofit.create(APIinterface.class);
+        Call<APIModel> call = apIinterface.getData();
+
+        call.enqueue(new Callback<APIModel>() {
+            @Override
+            public void onResponse(Call<APIModel> call, Response<APIModel> response) {
+                APIModel data = response.body();
+                APIuserame = data.getUsername();
+                APIpassword = data.getPassword();
+            }
+
+            @Override
+            public void onFailure(Call<APIModel> call, Throwable t) {
+                Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                APIuserame = "null";
+                APIpassword = "null";
+            }
+        });
     }
 
     @Override
