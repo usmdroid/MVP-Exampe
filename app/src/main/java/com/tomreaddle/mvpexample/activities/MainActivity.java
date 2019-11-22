@@ -21,9 +21,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, com.tomreaddle.mvpexample.view.View {
 
+    public String APIuserame, APIpassword;
     EditText username , password;
     Button signin;
-    String APIuserame, APIpassword;
 
     Presenter presenter;
     @Override
