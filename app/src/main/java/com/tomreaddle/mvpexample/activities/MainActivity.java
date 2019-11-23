@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements com.tomreaddle.mv
         password = findViewById(R.id.password);
         signin = findViewById(R.id.signin);
         apiConnect();
-        Log.d("TAG", "after: " + APIusername + "----" + APIpassword);
 
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,10 +71,9 @@ public class MainActivity extends AppCompatActivity implements com.tomreaddle.mv
         call.enqueue(new Callback<APIModel>() {
             @Override
             public void onResponse(Call<APIModel> call, Response<APIModel> response) {
-                APIusername = response.body().getUsername();
-                APIpassword = response.body().getPassword();
+                APIusername = response.body().getUsername(); //"usmdroid"
+                APIpassword = response.body().getPassword(); //"usmdroid"
                 presenter = new Model(MainActivity.this , APIusername , APIpassword);
-                Toast.makeText(MainActivity.this, APIusername + "\n" + APIpassword, Toast.LENGTH_SHORT).show();
             }
 
             @Override
