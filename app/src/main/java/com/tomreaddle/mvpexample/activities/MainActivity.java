@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -22,11 +23,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity implements com.tomreaddle.mvpexample.view.View {
 
-    String APIusername, APIpassword;
+    public String APIusername = "none", APIpassword = "none";
     EditText username , password;
     Button signin;
-
     Presenter presenter;
+
+    public void setAPIusername(String APIusername) {
+        this.APIusername = APIusername;
+    }
+
+    public void setAPIpassword(String APIpassword) {
+        this.APIpassword = APIpassword;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,13 +44,13 @@ public class MainActivity extends AppCompatActivity implements com.tomreaddle.mv
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         signin = findViewById(R.id.signin);
-
         apiConnect();
+        Log.d("TAG", "after: " + APIusername + "----" + APIpassword);
 
-        presenter = new Model(MainActivity.this , APIusername , APIpassword);
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                apiConnect();
                 presenter.performLogin(username.getText().toString(), password.getText().toString());
             }
         });
@@ -65,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements com.tomreaddle.mv
             public void onResponse(Call<APIModel> call, Response<APIModel> response) {
                 APIusername = response.body().getUsername();
                 APIpassword = response.body().getPassword();
+                presenter = new Model(MainActivity.this , APIusername , APIpassword);
                 Toast.makeText(MainActivity.this, APIusername + "\n" + APIpassword, Toast.LENGTH_SHORT).show();
             }
 

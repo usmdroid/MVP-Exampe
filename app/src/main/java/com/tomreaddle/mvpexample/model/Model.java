@@ -32,8 +32,6 @@ public class Model implements Presenter {
     @Override
     public void performLogin(String username, String password) {
 
-        Log.d(TAG, "performLogin: " + APIusername + "\n" + APIpassword);
-
         if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)){
                 view.loginValidation();
         } else {
