@@ -20,7 +20,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, com.tomreaddle.mvpexample.view.View {
+public class MainActivity extends AppCompatActivity implements com.tomreaddle.mvpexample.view.View {
 
     String APIusername, APIpassword;
     EditText username , password;
@@ -39,7 +39,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         apiConnect();
 
         presenter = new Model(MainActivity.this , APIusername , APIpassword);
-        signin.setOnClickListener(this);
+        signin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.performLogin(username.getText().toString(), password.getText().toString());
+            }
+        });
 
 
     }
@@ -58,26 +63,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         call.enqueue(new Callback<APIModel>() {
             @Override
             public void onResponse(Call<APIModel> call, Response<APIModel> response) {
-                APIModel data = response.body();
-                APIusername = data.getUsername();
-                APIpassword = data.getPassword();
+                APIusername = response.body().getUsername();
+                APIpassword = response.body().getPassword();
                 Toast.makeText(MainActivity.this, APIusername + "\n" + APIpassword, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call<APIModel> call, Throwable t) {
-                APIusername = "null";
-                APIpassword = "null";
-                Toast.makeText(MainActivity.this, APIusername + "\n" + APIpassword, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    @Override
-    public void onClick(View v) {
-        String usernamedata = username.getText().toString();
-        String passworddata = password.getText().toString();
-        presenter.performLogin(usernamedata , passworddata);
     }
 
     @Override

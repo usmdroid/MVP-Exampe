@@ -1,7 +1,14 @@
 package com.tomreaddle.mvpexample.API;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class APIModel {
+    @SerializedName("username")
+    @Expose
     String username;
+    @SerializedName("password")
+    @Expose
     String password;
 
     public APIModel(String username, String password) {
