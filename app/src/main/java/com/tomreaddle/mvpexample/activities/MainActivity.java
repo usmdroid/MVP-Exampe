@@ -85,16 +85,16 @@ public class MainActivity extends AppCompatActivity implements com.tomreaddle.mv
 
     @Override
     public void loginValidation() {
-        Toast.makeText(this, "Username va parolni kiriting", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Email va parolni kiriting", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void loginSuccess() {
-        Toast.makeText(this, "Login va parol to'g'ri", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Email va parol to'g'ri", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void loginError() {
-        Toast.makeText(this, "Username yoki parol xato", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Email yoki parol xato", Toast.LENGTH_SHORT).show();
     }
 }
