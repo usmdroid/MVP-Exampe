@@ -28,14 +28,6 @@ public class MainActivity extends AppCompatActivity implements com.tomreaddle.mv
     Button signin;
     Presenter presenter;
 
-    public void setAPIusername(String APIusername) {
-        this.APIusername = APIusername;
-    }
-
-    public void setAPIpassword(String APIpassword) {
-        this.APIpassword = APIpassword;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements com.tomreaddle.mv
         call.enqueue(new Callback<APIModel>() {
             @Override
             public void onResponse(Call<APIModel> call, Response<APIModel> response) {
-                APIusername = response.body().getUsername(); //"usmdroid"
+                APIusername = response.body().getUsername(); //"usm@droid.com"
                 APIpassword = response.body().getPassword(); //"usmdroid"
                 presenter = new Model(MainActivity.this , APIusername , APIpassword);
             }
