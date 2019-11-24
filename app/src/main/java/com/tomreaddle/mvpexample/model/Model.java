@@ -1,6 +1,10 @@
 package com.tomreaddle.mvpexample.model;
 
 import android.text.TextUtils;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.tomreaddle.mvpexample.activities.MainActivity;
 import com.tomreaddle.mvpexample.presenter.Presenter;
 import com.tomreaddle.mvpexample.view.View;
 
@@ -18,15 +22,12 @@ public class Model implements Presenter {
     @Override
     public void performLogin(String username, String password) {
 
-        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)){
-                view.loginValidation();
-        } else {
-            if (isValidEmailAddress(username) && password.equals(APIpassword)){
-                view.loginSuccess();
-            } else {
-                view.loginError();
-            }
-        }
+        if(TextUtils.isEmpty(username) && TextUtils.isEmpty(password)) view.Empty();
+        else if(TextUtils.isEmpty(username)) view.emailEmpty();
+        else if(TextUtils.isEmpty(password)) view.passwordEmpty();
+        else if(!isValidEmailAddress(username)) view.emailNotCorrect();
+        else if (username.equals(APIusername) && password.equals(APIpassword)){  view.loginSuccess();    }
+        else {  view.loginError(); }
     }
 
     public boolean isValidEmailAddress(String email) {
