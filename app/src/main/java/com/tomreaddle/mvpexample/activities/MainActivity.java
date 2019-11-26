@@ -14,6 +14,7 @@ import com.tomreaddle.mvpexample.API.APIinterface;
 import com.tomreaddle.mvpexample.R;
 import com.tomreaddle.mvpexample.model.Model;
 import com.tomreaddle.mvpexample.presenter.Presenter;
+import com.valdesekamdem.library.mdtoast.MDToast;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements com.tomreaddle.mv
     EditText username , password;
     Button signin;
     Presenter presenter;
+    MDToast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,31 +79,37 @@ public class MainActivity extends AppCompatActivity implements com.tomreaddle.mv
 
     @Override
     public void Empty() {
-        Toast.makeText(this, "Maydonlarni to'ldiring", Toast.LENGTH_SHORT).show();
+        toast = MDToast.makeText(this, "Maydonlarni to'ldiring", Toast.LENGTH_SHORT , MDToast.TYPE_INFO);
+        toast.show();
     }
 
     @Override
     public void emailEmpty() {
-        Toast.makeText(this, "E-mailni kiriting", Toast.LENGTH_SHORT).show();
+        toast = MDToast.makeText(this, "E-mailni kiriting", Toast.LENGTH_SHORT , MDToast.TYPE_INFO);
+        toast.show();
     }
 
     @Override
     public void passwordEmpty() {
-        Toast.makeText(this, "Parolni kiriting", Toast.LENGTH_SHORT).show();
+        toast = MDToast.makeText(this, "Parolni kiriting", Toast.LENGTH_SHORT , MDToast.TYPE_INFO);
+        toast.show();
     }
 
     @Override
     public void emailNotCorrect() {
-        Toast.makeText(this, "Bu e-mail manzil emas!", Toast.LENGTH_SHORT).show();
+        toast = MDToast.makeText(this, "Bu e-mail manzil emas!", Toast.LENGTH_SHORT , MDToast.TYPE_WARNING);
+        toast.show();
     }
 
     @Override
     public void loginSuccess() {
-        Toast.makeText(this, "Email va parol to'g'ri", Toast.LENGTH_SHORT).show();
+        toast = MDToast.makeText(this, "Email va parol to'g'ri", Toast.LENGTH_SHORT , MDToast.TYPE_SUCCESS);
+        toast.show();
     }
 
     @Override
     public void loginError() {
-        Toast.makeText(this, "Email yoki parol xato", Toast.LENGTH_SHORT).show();
+        toast = MDToast.makeText(this, "Email yoki parol xato", Toast.LENGTH_SHORT , MDToast.TYPE_ERROR);
+        toast.show();
     }
 }
