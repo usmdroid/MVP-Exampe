@@ -2,10 +2,6 @@ package com.tomreaddle.mvpexample.model;
 
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.tomreaddle.mvpexample.activities.MainActivity;
 import com.tomreaddle.mvpexample.presenter.Presenter;
 import com.tomreaddle.mvpexample.view.View;
 
